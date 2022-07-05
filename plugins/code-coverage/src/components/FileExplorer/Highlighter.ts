@@ -14,8 +14,23 @@
  * limitations under the License.
  */
 
-import 'highlight.js/styles/atom-one-dark.css';
 import highlight from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css';
+
+function languageFromExtension(extension: string) {
+  switch (extension) {
+    case 'm':
+      return 'objectivec';
+    case 'tsx':
+      return 'typescript';
+    case 'jsx':
+      return 'javascript';
+    case 'kt':
+      return 'kotlin';
+    default:
+      return extension;
+  }
+}
 
 /*
  * Given a file extension, repo name, and array of code lines, return a Promise resolving
@@ -28,27 +43,17 @@ import highlight from 'highlight.js';
  *
  * @see http://highlightjs.readthedocs.io/en/latest/api.html#highlight-name-value-ignore-illegals-continuation
  */
-export const highlightLines = (fileExtension: string, lines: Array<string>) => {
+export function highlightLines(fileExtension: string, lines: Array<string>) {
   const formattedLines: Array<string> = [];
-  let state: CompiledMode | Language | undefined;
-  let fileformat = fileExtension;
-  if (fileExtension === 'm') {
-    fileformat = 'objectivec';
-  }
-  if (fileExtension === 'tsx') {
-    fileformat = 'typescript';
-  }
-  if (fileExtension === 'jsx') {
-    fileformat = 'javascript';
-  }
-  if (fileExtension === 'kt') {
-    fileformat = 'kotlin';
-  }
+  const language = languageFromExtension(fileExtension);
 
   lines.forEach(line => {
-    const result = highlight.highlight(fileformat, line, true, state);
-    state = result.top;
+    const result = highlight.highlight(line, {
+      language,
+      ignoreIllegals: true,
+    });
     formattedLines.push(result.value);
   });
+
   return formattedLines;
-};
+}
