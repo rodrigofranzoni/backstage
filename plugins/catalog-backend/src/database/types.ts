@@ -15,10 +15,10 @@
  */
 
 import { Entity } from '@backstage/catalog-model';
+import { DeferredEntity } from '@backstage/catalog-node';
 import { JsonObject } from '@backstage/types';
 import { DateTime } from 'luxon';
-import { EntityRelationSpec } from '../api';
-import { DeferredEntity } from '../processing/types';
+import { EntityRelationSpec } from '@backstage/catalog-node';
 import { DbRelationsRow } from './tables';
 
 /**

@@ -29,7 +29,7 @@ import {
   CatalogProcessor,
   CatalogProcessorEmit,
   LocationSpec,
-} from '../../api';
+} from '@backstage/catalog-node';
 
 /** @public */
 export class AnnotateLocationEntityProcessor implements CatalogProcessor {

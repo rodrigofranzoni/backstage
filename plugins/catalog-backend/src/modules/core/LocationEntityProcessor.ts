@@ -22,7 +22,7 @@ import {
   CatalogProcessor,
   CatalogProcessorEmit,
   LocationSpec,
-} from '../../api';
+} from '@backstage/catalog-node';
 
 export function toAbsoluteUrl(
   integrations: ScmIntegrationRegistry,

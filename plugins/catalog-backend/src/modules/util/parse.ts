@@ -22,7 +22,7 @@ import {
   CatalogProcessorResult,
   LocationSpec,
   processingResult,
-} from '../../api';
+} from '@backstage/catalog-node';
 
 /** @public */
 export function* parseEntityYaml(

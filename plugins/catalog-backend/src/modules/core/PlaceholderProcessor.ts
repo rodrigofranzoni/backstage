@@ -19,7 +19,7 @@ import { Entity } from '@backstage/catalog-model';
 import { JsonValue } from '@backstage/types';
 import { ScmIntegrationRegistry } from '@backstage/integration';
 import yaml from 'yaml';
-import { CatalogProcessor, LocationSpec } from '../../api';
+import { CatalogProcessor, LocationSpec } from '@backstage/catalog-node';
 
 /** @public */
 export type PlaceholderResolverRead = (url: string) => Promise<Buffer>;

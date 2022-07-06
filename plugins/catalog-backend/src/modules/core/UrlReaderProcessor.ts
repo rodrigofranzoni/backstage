@@ -29,7 +29,7 @@ import {
   CatalogProcessorResult,
   LocationSpec,
   processingResult,
-} from '../../api';
+} from '@backstage/catalog-node';
 
 const CACHE_KEY = 'v1';
 

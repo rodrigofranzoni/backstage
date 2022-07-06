@@ -30,7 +30,7 @@ import {
   CatalogProcessorParser,
   LocationSpec,
   processingResult,
-} from '../api';
+} from '@backstage/catalog-node';
 import { CatalogRulesEnforcer } from '../ingestion/CatalogRules';
 import { DefaultCatalogProcessingOrchestrator } from './DefaultCatalogProcessingOrchestrator';
 import { defaultEntityDataParser } from '../modules/util/parse';

@@ -20,7 +20,25 @@
  * @packageDocumentation
  */
 
-export * from './api';
+export type {
+  DeferredEntity,
+  LocationSpec,
+  EntityRelationSpec,
+  CatalogProcessor,
+  CatalogProcessorParser,
+  CatalogProcessorCache,
+  CatalogProcessorEmit,
+  CatalogProcessorLocationResult,
+  CatalogProcessorEntityResult,
+  CatalogProcessorRelationResult,
+  CatalogProcessorErrorResult,
+  CatalogProcessorResult,
+  EntityProvider,
+  EntityProviderConnection,
+  EntityProviderMutation,
+} from '@backstage/catalog-node';
+export { processingResult } from '@backstage/catalog-node';
+
 export * from './catalog';
 export * from './ingestion';
 export * from './modules';

@@ -16,8 +16,7 @@
 
 import { Entity } from '@backstage/catalog-model';
 import { JsonObject } from '@backstage/types';
-import { EntityRelationSpec } from '../api';
-
+import { DeferredEntity, EntityRelationSpec } from '@backstage/catalog-node';
 /**
  * The request to process an entity.
  * @public
@@ -52,15 +51,6 @@ export type EntityProcessingResult =
 export interface CatalogProcessingOrchestrator {
   process(request: EntityProcessingRequest): Promise<EntityProcessingResult>;
 }
-
-/**
- * Entities that are not yet processed.
- * @public
- */
-export type DeferredEntity = {
-  entity: Entity;
-  locationKey?: string;
-};
 
 /** @public */
 export interface CatalogProcessingEngine {

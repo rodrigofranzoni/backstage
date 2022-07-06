@@ -8,16 +8,30 @@
 import { BackendRegistrable } from '@backstage/backend-plugin-api';
 import { CatalogApi } from '@backstage/catalog-client';
 import { CatalogEntityDocument } from '@backstage/plugin-catalog-common';
-import { CompoundEntityRef } from '@backstage/catalog-model';
+import { CatalogProcessor } from '@backstage/catalog-node';
+import { CatalogProcessorCache } from '@backstage/catalog-node';
+import { CatalogProcessorEmit } from '@backstage/catalog-node';
+import { CatalogProcessorEntityResult } from '@backstage/catalog-node';
+import { CatalogProcessorErrorResult } from '@backstage/catalog-node';
+import { CatalogProcessorLocationResult } from '@backstage/catalog-node';
+import { CatalogProcessorParser } from '@backstage/catalog-node';
+import { CatalogProcessorRelationResult } from '@backstage/catalog-node';
+import { CatalogProcessorResult } from '@backstage/catalog-node';
 import { ConditionalPolicyDecision } from '@backstage/plugin-permission-common';
 import { Conditions } from '@backstage/plugin-permission-node';
 import { Config } from '@backstage/config';
+import { DeferredEntity } from '@backstage/catalog-node';
 import { DocumentCollatorFactory } from '@backstage/plugin-search-common';
 import { Entity } from '@backstage/catalog-model';
 import { EntityPolicy } from '@backstage/catalog-model';
+import { EntityProvider } from '@backstage/catalog-node';
+import { EntityProviderConnection } from '@backstage/catalog-node';
+import { EntityProviderMutation } from '@backstage/catalog-node';
+import { EntityRelationSpec } from '@backstage/catalog-node';
 import { GetEntitiesRequest } from '@backstage/catalog-client';
 import { JsonValue } from '@backstage/types';
 import { LocationEntityV1alpha1 } from '@backstage/catalog-model';
+import { LocationSpec } from '@backstage/catalog-node';
 import { Logger } from 'winston';
 import { Permission } from '@backstage/plugin-permission-common';
 import { PermissionAuthorizer } from '@backstage/plugin-permission-common';
@@ -27,11 +41,11 @@ import { PermissionEvaluator } from '@backstage/plugin-permission-common';
 import { PermissionRule } from '@backstage/plugin-permission-node';
 import { PluginDatabaseManager } from '@backstage/backend-common';
 import { PluginEndpointDiscovery } from '@backstage/backend-common';
+import { processingResult } from '@backstage/catalog-node';
 import { Readable } from 'stream';
 import { ResourcePermission } from '@backstage/plugin-permission-common';
 import { Router } from 'express';
 import { ScmIntegrationRegistry } from '@backstage/integration';
-import { ServiceRef } from '@backstage/backend-plugin-api';
 import { TokenManager } from '@backstage/backend-common';
 import { UrlReader } from '@backstage/backend-common';
 import { Validators } from '@backstage/catalog-model';
@@ -212,88 +226,23 @@ export interface CatalogProcessingEngine {
   stop(): Promise<void>;
 }
 
-// @alpha (undocumented)
-export interface CatalogProcessingInitApi {
-  // (undocumented)
-  addProcessor(processor: CatalogProcessor): void;
-}
+export { CatalogProcessor };
 
-// @alpha (undocumented)
-export const catalogProcessingInitApiRef: ServiceRef<CatalogProcessingInitApi>;
+export { CatalogProcessorCache };
 
-// @public (undocumented)
-export type CatalogProcessor = {
-  getProcessorName(): string;
-  readLocation?(
-    location: LocationSpec,
-    optional: boolean,
-    emit: CatalogProcessorEmit,
-    parser: CatalogProcessorParser,
-    cache: CatalogProcessorCache,
-  ): Promise<boolean>;
-  preProcessEntity?(
-    entity: Entity,
-    location: LocationSpec,
-    emit: CatalogProcessorEmit,
-    originLocation: LocationSpec,
-    cache: CatalogProcessorCache,
-  ): Promise<Entity>;
-  validateEntityKind?(entity: Entity): Promise<boolean>;
-  postProcessEntity?(
-    entity: Entity,
-    location: LocationSpec,
-    emit: CatalogProcessorEmit,
-    cache: CatalogProcessorCache,
-  ): Promise<Entity>;
-};
+export { CatalogProcessorEmit };
 
-// @public
-export interface CatalogProcessorCache {
-  get<ItemType extends JsonValue>(key: string): Promise<ItemType | undefined>;
-  set<ItemType extends JsonValue>(key: string, value: ItemType): Promise<void>;
-}
+export { CatalogProcessorEntityResult };
 
-// @public (undocumented)
-export type CatalogProcessorEmit = (generated: CatalogProcessorResult) => void;
+export { CatalogProcessorErrorResult };
 
-// @public (undocumented)
-export type CatalogProcessorEntityResult = {
-  type: 'entity';
-  entity: Entity;
-  location: LocationSpec;
-};
+export { CatalogProcessorLocationResult };
 
-// @public (undocumented)
-export type CatalogProcessorErrorResult = {
-  type: 'error';
-  error: Error;
-  location: LocationSpec;
-};
+export { CatalogProcessorParser };
 
-// @public (undocumented)
-export type CatalogProcessorLocationResult = {
-  type: 'location';
-  location: LocationSpec;
-};
+export { CatalogProcessorRelationResult };
 
-// @public
-export type CatalogProcessorParser = (options: {
-  data: Buffer;
-  location: LocationSpec;
-}) => AsyncIterable<CatalogProcessorResult>;
-
-// @public (undocumented)
-export type CatalogProcessorRelationResult = {
-  type: 'relation';
-  relation: EntityRelationSpec;
-};
-
-// @public (undocumented)
-export type CatalogProcessorResult =
-  | CatalogProcessorLocationResult
-  | CatalogProcessorEntityResult
-  | CatalogProcessorRelationResult
-  | CatalogProcessorErrorResult;
+export { CatalogProcessorResult };
 
 // @public (undocumented)
 export class CodeOwnersProcessor implements CatalogProcessor {
@@ -401,11 +350,7 @@ export type DefaultCatalogCollatorFactoryOptions = {
   catalogClient?: CatalogApi;
 };
 
-// @public
-export type DeferredEntity = {
-  entity: Entity;
-  locationKey?: string;
-};
+export { DeferredEntity };
 
 // @public
 export type EntitiesSearchFilter = {
@@ -426,35 +371,13 @@ export type EntityFilter =
     }
   | EntitiesSearchFilter;
 
-// @public
-export interface EntityProvider {
-  connect(connection: EntityProviderConnection): Promise<void>;
-  getProviderName(): string;
-}
+export { EntityProvider };
 
-// @public
-export interface EntityProviderConnection {
-  applyMutation(mutation: EntityProviderMutation): Promise<void>;
-}
+export { EntityProviderConnection };
 
-// @public
-export type EntityProviderMutation =
-  | {
-      type: 'full';
-      entities: DeferredEntity[];
-    }
-  | {
-      type: 'delta';
-      added: DeferredEntity[];
-      removed: DeferredEntity[];
-    };
+export { EntityProviderMutation };
 
-// @public
-export type EntityRelationSpec = {
-  source: CompoundEntityRef;
-  type: string;
-  target: CompoundEntityRef;
-};
+export { EntityRelationSpec };
 
 // @public (undocumented)
 export class FileReaderProcessor implements CatalogProcessor {
@@ -494,12 +417,7 @@ export type LocationEntityProcessorOptions = {
   integrations: ScmIntegrationRegistry;
 };
 
-// @public
-export type LocationSpec = {
-  type: string;
-  target: string;
-  presence?: 'optional' | 'required';
-};
+export { LocationSpec };
 
 // @public (undocumented)
 export function locationSpecToLocationEntity(opts: {
@@ -595,27 +513,7 @@ export type PlaceholderResolverResolveUrl = (
 // @public
 export type ProcessingIntervalFunction = () => number;
 
-// @public
-export const processingResult: Readonly<{
-  readonly notFoundError: (
-    atLocation: LocationSpec,
-    message: string,
-  ) => CatalogProcessorResult;
-  readonly inputError: (
-    atLocation: LocationSpec,
-    message: string,
-  ) => CatalogProcessorResult;
-  readonly generalError: (
-    atLocation: LocationSpec,
-    message: string,
-  ) => CatalogProcessorResult;
-  readonly location: (newLocation: LocationSpec) => CatalogProcessorResult;
-  readonly entity: (
-    atLocation: LocationSpec,
-    newEntity: Entity,
-  ) => CatalogProcessorResult;
-  readonly relation: (spec: EntityRelationSpec) => CatalogProcessorResult;
-}>;
+export { processingResult };
 
 // @public (undocumented)
 export class UrlReaderProcessor implements CatalogProcessor {

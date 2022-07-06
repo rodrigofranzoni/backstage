@@ -34,7 +34,6 @@ import {
   ListParentsOptions,
   ListParentsResult,
 } from './types';
-import { DeferredEntity } from '../processing/types';
 import { ProcessingIntervalFunction } from '../processing/refresh';
 import { rethrowError, timestampToDateTime } from './conversion';
 import { initDatabaseMetrics } from './metrics';
@@ -46,6 +45,7 @@ import {
 
 import { generateStableHash } from './util';
 import { isDatabaseConflictError } from '@backstage/backend-common';
+import { DeferredEntity } from '@backstage/catalog-node';
 
 // The number of items that are sent per batch to the database layer, when
 // doing .batchInsert calls to knex. This needs to be low enough to not cause

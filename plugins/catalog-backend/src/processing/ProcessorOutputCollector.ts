@@ -20,11 +20,14 @@ import {
   ANNOTATION_ORIGIN_LOCATION,
   stringifyLocationRef,
 } from '@backstage/catalog-model';
+import { DeferredEntity } from '@backstage/catalog-node';
 import { assertError } from '@backstage/errors';
 import { Logger } from 'winston';
-import { CatalogProcessorResult, EntityRelationSpec } from '../api';
+import {
+  CatalogProcessorResult,
+  EntityRelationSpec,
+} from '@backstage/catalog-node';
 import { locationSpecToLocationEntity } from '../util/conversion';
-import { DeferredEntity } from './types';
 import {
   getEntityLocationRef,
   getEntityOriginLocationRef,

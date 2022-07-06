@@ -53,7 +53,7 @@ import {
   CatalogProcessorEmit,
   LocationSpec,
   processingResult,
-} from '../../api';
+} from '@backstage/catalog-node';
 
 /** @public */
 export class BuiltinKindsEntityProcessor implements CatalogProcessor {
