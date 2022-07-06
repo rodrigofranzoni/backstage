@@ -1,5 +1,33 @@
 # @backstage/plugin-kubernetes-backend
 
+## 0.7.0-next.3
+
+### Minor Changes
+
+- 1454bf98e7: Add new endpoints to Kubernetes backend plugin
+
+  BREAKING: Kubernetes backend plugin now depends on CatalogApi
+
+  ```typescript
+  // Create new CatalogClient
+  const catalogApi = new CatalogClient({ discoveryApi: env.discovery });
+  const { router } = await KubernetesBuilder.createBuilder({
+    logger: env.logger,
+    config: env.config,
+    // Inject it into createBuilder params
+    catalogApi,
+  }).build();
+  ```
+
+### Patch Changes
+
+- eadb3a8d2e: Updated dependency `@kubernetes/client-node` to `^0.17.0`.
+- Updated dependencies
+  - @backstage/backend-common@0.14.1-next.3
+  - @backstage/catalog-client@1.0.4-next.2
+  - @backstage/plugin-auth-node@0.2.3-next.2
+  - @backstage/plugin-kubernetes-common@0.4.0-next.2
+
 ## 0.7.0-next.2
 
 ### Patch Changes

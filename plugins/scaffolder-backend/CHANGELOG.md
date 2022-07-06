@@ -1,5 +1,20 @@
 # @backstage/plugin-scaffolder-backend
 
+## 1.4.0-next.3
+
+### Patch Changes
+
+- af02f54483: new setUserAsOwner flag for publish:gitlab action
+
+  The field default is `false`. When true it will use the token configured in the gitlab integration for the matching host, to try and set the user logged in via `repoUrlPicker` `requestUserCredentials` OAuth flow as owner of the repository created in GitLab.
+
+- a70869e775: Updated dependency `msw` to `^0.43.0`.
+- Updated dependencies
+  - @backstage/backend-common@0.14.1-next.3
+  - @backstage/catalog-client@1.0.4-next.2
+  - @backstage/integration@1.2.2-next.3
+  - @backstage/plugin-catalog-backend@1.2.1-next.3
+
 ## 1.4.0-next.2
 
 ### Minor Changes

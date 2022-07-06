@@ -1,5 +1,11 @@
 # @backstage/catalog-client
 
+## 1.0.4-next.2
+
+### Patch Changes
+
+- a70869e775: Updated dependency `msw` to `^0.43.0`.
+
 ## 1.0.4-next.1
 
 ### Patch Changes

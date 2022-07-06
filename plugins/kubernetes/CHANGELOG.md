@@ -1,5 +1,17 @@
 # @backstage/plugin-kubernetes
 
+## 0.6.7-next.3
+
+### Patch Changes
+
+- a70869e775: Updated dependency `msw` to `^0.43.0`.
+- eadb3a8d2e: Updated dependency `@kubernetes/client-node` to `^0.17.0`.
+- Updated dependencies
+  - @backstage/core-components@0.10.0-next.3
+  - @backstage/core-plugin-api@1.0.4-next.0
+  - @backstage/plugin-kubernetes-common@0.4.0-next.2
+  - @backstage/plugin-catalog-react@1.1.2-next.3
+
 ## 0.6.7-next.2
 
 ### Patch Changes

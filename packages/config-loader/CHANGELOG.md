@@ -1,5 +1,12 @@
 # @backstage/config-loader
 
+## 1.1.3-next.1
+
+### Patch Changes
+
+- a70869e775: Updated dependency `msw` to `^0.43.0`.
+- a3acec8819: Updated dependency `typescript-json-schema` to `^0.54.0`.
+
 ## 1.1.3-next.0
 
 ### Patch Changes

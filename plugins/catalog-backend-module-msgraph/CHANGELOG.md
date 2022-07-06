@@ -1,5 +1,13 @@
 # @backstage/plugin-catalog-backend-module-msgraph
 
+## 0.4.0-next.2
+
+### Patch Changes
+
+- a70869e775: Updated dependency `msw` to `^0.43.0`.
+- Updated dependencies
+  - @backstage/plugin-catalog-backend@1.2.1-next.3
+
 ## 0.4.0-next.1
 
 ### Minor Changes

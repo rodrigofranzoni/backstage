@@ -1,5 +1,12 @@
 # @backstage/integration
 
+## 1.2.2-next.3
+
+### Patch Changes
+
+- a70869e775: Updated dependency `msw` to `^0.43.0`.
+- 4df3390795: Avoid double encoding of the file path in `getBitbucketServerDownloadUrl`
+
 ## 1.2.2-next.2
 
 ### Patch Changes

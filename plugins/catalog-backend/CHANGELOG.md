@@ -1,5 +1,17 @@
 # @backstage/plugin-catalog-backend
 
+## 1.2.1-next.3
+
+### Patch Changes
+
+- a70869e775: Updated dependency `msw` to `^0.43.0`.
+- Updated dependencies
+  - @backstage/backend-common@0.14.1-next.3
+  - @backstage/catalog-client@1.0.4-next.2
+  - @backstage/integration@1.2.2-next.3
+  - @backstage/plugin-permission-common@0.6.3-next.1
+  - @backstage/plugin-permission-node@0.6.3-next.2
+
 ## 1.2.1-next.2
 
 ### Patch Changes

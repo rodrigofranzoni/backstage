@@ -1,5 +1,14 @@
 # @backstage/plugin-search-backend-node
 
+## 0.6.3-next.2
+
+### Patch Changes
+
+- a21cd43467: Exports `MissingIndexError` that can be used by the search engines for better error handling when missing index.
+- Updated dependencies
+  - @backstage/backend-common@0.14.1-next.3
+  - @backstage/plugin-permission-common@0.6.3-next.1
+
 ## 0.6.3-next.1
 
 ### Patch Changes

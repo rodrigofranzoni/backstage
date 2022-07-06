@@ -1,5 +1,17 @@
 # @backstage/plugin-airbrake
 
+## 0.3.7-next.3
+
+### Patch Changes
+
+- a70869e775: Updated dependency `msw` to `^0.43.0`.
+- Updated dependencies
+  - @backstage/core-components@0.10.0-next.3
+  - @backstage/core-plugin-api@1.0.4-next.0
+  - @backstage/test-utils@1.1.2-next.2
+  - @backstage/dev-utils@1.0.4-next.3
+  - @backstage/plugin-catalog-react@1.1.2-next.3
+
 ## 0.3.7-next.2
 
 ### Patch Changes
